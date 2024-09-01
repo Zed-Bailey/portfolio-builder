@@ -24,7 +24,7 @@ const Index = () => {
   const { toast } = useToast();
 
   const addAssets = (asset: InvestmentEtf) => {
-    setSavedAssets((prev) => [asset, ...prev])
+    setSavedAssets((prev) => [...prev, asset])
   }
 
   const updateAsset = (key: string, value: unknown, id: string) => {
@@ -56,11 +56,13 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setTimeout(() => {
       window.localStorage.setItem('savedAssets', JSON.stringify(savedAssets));
-
+      toast({
+        title: "Saved changes"
+      })
     }, 2500);
-    return () => clearInterval(interval);
+    return () => clearTimeout(interval);
   }, [savedAssets]);
 
   useEffect(() => {
@@ -167,7 +169,7 @@ const AddInvestment = ({ onAdd, children }: { onAdd: (investment: InvestmentEtf)
               <Button disabled={!isValid} variant="default" onClick={() => onAdd({
                 name: nameProps.value,
                 distributionFrequencey: distributionProps.value,
-                id: v4()
+                uuid: v4(),
               })}>Add</Button>
             </DialogClose>
           </div>

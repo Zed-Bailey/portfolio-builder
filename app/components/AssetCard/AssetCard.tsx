@@ -83,13 +83,13 @@ export const AssetCard = ({ etf, investmentAmount, setField, onDelete }: {
 
             </CardContent>
 
-            {etf.units && etf.price ? <CardFooter>
+            <CardFooter>
                 <CardDescription className="flex flex-row items-center gap-1">
-                    <p className="min-w-fit">Total asset value: {formatMoney(etf.units * etf.price)} or </p>
-                    <Input className="w-20" defaultValue={percentageOf((etf.units * etf.price), investmentAmount)} onChange={(e) => updateUnits(e.target.value)} />
+                    {etf.units && etf.price ? <p className="min-w-fit">Total asset value: {formatMoney(etf.units * etf.price)} or </p> : null}
+                    <Input className="w-20" defaultValue={percentageOf(((etf.units ?? 0) * (etf.price ?? 0)), investmentAmount)} onChange={(e) => updateUnits(e.target.value)} />
                     <p>% of investment</p>
                 </CardDescription>
-            </CardFooter> : null}
+            </CardFooter>
         </Card>
     );
 }

@@ -77,7 +77,7 @@ export const Overview = ({ etfs, investmentAmount }: { etfs: InvestmentEtf[], in
                         <CardDescription>Percentage of portfolio that has been allocated</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        {<p className={`text-4xl font-thin ${allocationPct > 100 ? 'text-red-500 font-bold' : 'text-green-500'}`}>{formatNumber(isNaN(allocationPct) ? 0 : allocationPct)}%</p>}
+                        {<p className={`text-4xl font-thin ${allocationPct > 100 ? 'text-red-500 font-bold' : ''} ${allocationPct === 100 ? 'text-green-500' : ''}`}>{formatNumber(isNaN(allocationPct) ? 0 : allocationPct)}%</p>}
                     </CardContent>
                     <CardFooter>
                         {
